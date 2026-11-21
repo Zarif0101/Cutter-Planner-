@@ -1,0 +1,41 @@
+<pre id="bench">pending</pre>
+<script>
+setTimeout(async () => {
+  const out = []; const log = (s) => { out.push(s); document.getElementById("bench").textContent = out.join("\n"); };
+  const wait = (ms) => new Promise(r => setTimeout(r, ms));
+  try {
+    const ME = window.MarkerEngine;
+    // 1) wait for the auto-run plan to finish
+    for (let i = 0; i < 600 && !/Plan ready/.test(document.getElementById("run-status").textContent); i++) await wait(500);
+    log("status: " + document.getElementById("run-status").textContent);
+    log("total: " + document.getElementById("st-kg").textContent + " | " + document.getElementById("st-dz-sub").textContent);
+    // 2) long run: whole plan, 2 tries
+    document.getElementById("sc-plan").click(); document.getElementById("lim-tries").click();
+    document.getElementById("in-tries").value = "2";
+    document.getElementById("btn-long").click();
+    log("long started, button: " + document.getElementById("btn-long").textContent);
+    for (let i = 0; i < 600 && !/Finished|Stopped/.test(document.getElementById("long-status").textContent); i++) await wait(500);
+    log("long: " + document.getElementById("long-status").textContent);
+    log("button after: " + document.getElementById("btn-long").textContent + " disabled=" + document.getElementById("btn-long").disabled);
+    // 3) malicious SVG import
+    const evil = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600mm" height="400mm" viewBox="0 0 600 400">
+      <style>body{display:none !important}</style><script>window.__pwned=1<\/script>
+      <a href="javascript:window.__pwned=2"><rect id="front" x="10" y="10" width="300" height="200" onload="window.__pwned=3"/></a>
+      <g transform="translate(320,10)"><polygon id="sleeve" points="0,0 200,0 180,150 20,150"/></g>
+      <use href="#front" x="0" y="220"/><image href="https://example.com/x.png" width="10" height="10"/>
+      <set attributeName="href" to="javascript:alert(1)"/>
+      <foreignObject><div xmlns="http://www.w3.org/1999/xhtml">x</div></foreignObject>
+    </svg>`;
+    document.getElementById("src-custom").click();
+    const f = new File([evil], "evil.svg", { type: "image/svg+xml" });
+    const dt = new DataTransfer(); dt.items.add(f); const inp = document.getElementById("in-cad"); inp.files = dt.files; inp.dispatchEvent(new Event("change"));
+    await wait(1500);
+    log("svg msg: " + document.getElementById("pc-msg").textContent);
+    log("pieces: " + document.querySelectorAll("#pieces .pc").length + " | names: " + Array.from(document.querySelectorAll('#pieces input[data-k="name"]')).map(i => i.value).join(","));
+    log("pwned=" + (window.__pwned || 0) + " body display=" + getComputedStyle(document.body).display + " leftover hidden svgs=" + document.querySelectorAll("body > svg").length);
+    // 4) clamping
+    document.getElementById("in-width").value = "99999"; document.getElementById("in-tlen").value = "-5";
+    log("clamped job width/table: " + (function(){ const j = (window.__buildJobForTest || null); return j ? "" : "n/a"; })());
+  } catch (e) { log("ERROR " + (e && e.stack || e)); }
+}, 100);
+</script>

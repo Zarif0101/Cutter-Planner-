@@ -1,0 +1,60 @@
+<pre id="bench">pending</pre>
+<script>
+setTimeout(async () => {
+  const out = [];
+  const log = (s) => { out.push(s); document.getElementById("bench").textContent = out.join("\n"); };
+  try {
+    const ME = window.MarkerEngine, _ = ME._;
+    const meas = { S: [480, 690, 420, 210, 180, 95, 20, 190, 200, 165, 90], M: [510, 710, 440, 220, 185, 100, 20, 200, 210, 170, 95], L: [540, 730, 460, 230, 190, 100, 22, 210, 220, 175, 100], XL: [570, 750, 480, 240, 195, 105, 22, 220, 230, 180, 105], "2XL": [600, 770, 500, 250, 200, 110, 24, 230, 240, 185, 110] };
+    const base = { source: "meas", sizes: ["S", "M", "L", "XL", "2XL"], meas, svgPieces: [], gsm: 160, tableLenMM: 10000, tableWidMM: 1900, maxPlies: 80, margin: 10, gap: 2, sa: 10, hem: 15, rot: true, tilt: 0, endLossMM: 20, shrL: 0, shrW: 0, overcut: 0.02, layPenaltyKg: 3, hand: 0.8, mode: "quick", seed: 7 };
+    const ratio = { S: 1, M: 2, L: 2, XL: 1 };
+    for (const win of [60, 66]) {
+      const job = Object.assign({}, base, { widthMM: win * 25.4 });
+      const Tt = _.buildTypes(job), ctx = _.makeCtx(job, Tt);
+      // OLD (v1): greedy bottom-left + order shuffling at 5 mm, 1500 tries
+      let t0 = performance.now();
+      const inst = _.instances(ctx, ratio), r = 5, H = Math.floor(ctx.usable / r), R = inst.map(it => _.rasters(ctx, it.ty, r));
+      let bo = null, bs = null, bl = Infinity;
+      for (const o of _.baseOrders(R, inst)) { const s = _.greedy(R, H, o); const L = _.lenCols(R, s); if (L < bl) { bl = L; bs = s; bo = o; } }
+      const rng = _.mulberry(99);
+      for (let i = 0; i < 1500; i++) { const c = _.mutate(bo, rng), s = _.greedy(R, H, c); if (!s) continue; const L = _.lenCols(R, s); if (L <= bl) { bl = L; bs = s; bo = c; } }
+      const old = _.markerResult(ctx, inst, R, r, bs, ratio);
+      const tOld = performance.now() - t0;
+      log(`${win}in OLD  greedy+shuffle(1500): len ${(old.length/1000).toFixed(3)} m  eff ${(old.eff*100).toFixed(2)}%  lb-gap ${((old.length/old.lb-1)*100).toFixed(1)}%  ${(tOld/1000).toFixed(1)}s`);
+      for (const mode of ["quick", "thorough"]) {
+        t0 = performance.now();
+        const m = await _.nestMarker(ctx, ratio, { mode, seed: 7 });
+        const dt = performance.now() - t0;
+        log(`${win}in NEW ${mode.padEnd(8)}: len ${(m.length/1000).toFixed(3)} m  eff ${(m.eff*100).toFixed(2)}%  lb-gap ${((m.length/m.lb-1)*100).toFixed(1)}%  ${(dt/1000).toFixed(1)}s  [greedy ${(m.stats.greedyMM/1000).toFixed(3)} -> overlap ${(m.stats.omMM/1000).toFixed(3)} -> 1mm ${(m.length/1000).toFixed(3)}] shuffles ${m.stats.shuffles} moves ${m.stats.moves}`);
+      }
+    }
+    // full plan
+    let t1 = performance.now();
+    const job = Object.assign({}, base, { widthMM: 66 * 25.4, demand: { S: 800, M: 1500, L: 1500, XL: 700, "2XL": 0 } });
+    const plan = await ME.planOrder(job, { onProgress: (d) => {} });
+    const tot = ME.computeTotals(plan, job);
+    log(`PLAN: ${plan.lays.length} lays, ${plan.markers.length} markers, tested ${plan.tested} mixes, ${((performance.now()-t1)/1000).toFixed(1)}s`);
+    plan.lays.forEach((l, i) => { const m = plan.markers[l.marker]; log(`  lay ${i+1}: marker ${String.fromCharCode(65+l.marker)} ${JSON.stringify(m.ratio)} plies ${l.plies} len ${(m.length/1000).toFixed(2)} m eff ${(m.eff*100).toFixed(1)}%`); });
+    log(`  total ${tot.kg.toFixed(1)} kg, hand ${tot.kgHand.toFixed(1)} kg, kg/dz ${tot.kgDz.toFixed(3)}, eff ${(tot.eff*100).toFixed(1)}%, garments ${tot.garments}/${tot.demand}, over ${tot.over}, short ${tot.short}`);
+    log(`  planned ${JSON.stringify(tot.planned)}`);
+    // overlap audit on final markers: rasterise world polygons at 1 mm and check pairwise
+    let worst = 0;
+    for (const m of plan.markers) {
+      const polys = m.placements.map(p => p.cut);
+      for (let a = 0; a < polys.length; a++) for (let b = a + 1; b < polys.length; b++) {
+        const A = polys[a], B = polys[b];
+        const ba = ME.bbox(A), bb = ME.bbox(B);
+        if (ba.maxx < bb.minx || bb.maxx < ba.minx || ba.maxy < bb.miny || bb.maxy < ba.miny) continue;
+        // sample points of A inside B
+        const inside = (pt, poly) => { let c = false; for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) { const xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1]; if (((yi > pt[1]) !== (yj > pt[1])) && (pt[0] < (xj - xi) * (pt[1] - yi) / (yj - yi) + xi)) c = !c; } return c; };
+        let hits = 0; for (const p of A) if (inside(p, B)) hits++; for (const p of B) if (inside(p, A)) hits++;
+        worst = Math.max(worst, hits);
+      }
+      const ys = m.placements.flatMap(p => p.cut.map(q => q[1])); const minY = Math.min(...ys), maxY = Math.max(...ys);
+      if (minY < 9.5 || maxY > m.widthMM - 9.5) log(`  EDGE VIOLATION marker y ${minY.toFixed(1)}..${maxY.toFixed(1)} of ${m.widthMM.toFixed(0)}`);
+    }
+    log(`  overlap audit: worst vertex-inside count ${worst}`);
+  } catch (e) { log("ERROR " + (e && e.stack || e)); }
+  document.getElementById("bench").setAttribute("data-done", "1");
+}, 50);
+</script>

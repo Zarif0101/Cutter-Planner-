@@ -1,0 +1,310 @@
+TITLE: Cutting Room Auto-Nesting: Execution Report
+SUBTITLE: A low-cost plan to cut fabric waste and manual work in T-shirt cutting · Draft for owner review · November 2026
+
+# 1. Summary
+
+Today the cutting room makes every marker (the layout of pattern pieces on the fabric) by hand, with cardboard patterns and chalk. Nobody measures how much fabric becomes scraps. This plan moves marker making to a computer using free software, prints the marker at full size, and measures the result on every order.
+
+| Item | In short |
+|---|---|
+| **Goal** | Use more of every kg of fabric: move fabric yield as close to 90% as each order allows |
+| **Why it matters** | Every 1% better yield saves about **Tk 55,000–68,000 a month** (about Tk 7–8 lakh a year) |
+| **How** | Phone photos of patterns, free nesting software (Deepnest), printed full-size markers, weekly measurement |
+| **Cost to start** | Almost nothing. The main purchase (a plotter, about Tk 2.5–3.5 lakh) happens **only after a pilot proves the saving** |
+| **Time** | About 3 months from start to daily use, with no rush |
+| **People** | Pattern master, cutting master, one younger staff member on the computer, accountant for tracking |
+
+> **Decision needed from the owner:** approve Phases 1–5 (almost no cost). Decide the budget tier (Section 6) after the pilot results.
+
+# 2. Where the factory is today
+
+| Topic | What we found |
+|---|---|
+| Product | T-shirts, mostly polyester, sometimes cotton |
+| Volume | About 50,000 T-shirts a month, several new orders every week |
+| Marker making | By hand: cardboard patterns traced with chalk |
+| Patterns | Made by hand by the pattern master; no computer files |
+| Fabric tracking | Not measured exactly; current yield is unknown |
+| Fabric width and layers | Change with each order |
+| Equipment owned | Computer, smartphone, office printer, internet |
+| Budget | Small, mainly for a large printer (plotter) |
+| Who runs the computer | A younger staff member who is good with computers |
+| Priorities | 1. Fabric waste, 2. Time and labour, 3. Mistakes, 4. Speed |
+
+# 3. What wasted fabric really costs
+
+The factory buys yarn and pays for knitting and dyeing, so each kg of finished fabric carries all three costs.
+
+| Cost step | Taka per kg | Source |
+|---|---|---|
+| Yarn (average) | about 411 | November yarn bills 977–979: 4,508 kg for Tk 18.54 lakh |
+| Knitting | about 38 | Accountant's average |
+| Dyeing | about 100 | Accountant's average |
+| **Finished fabric** | **about 549** | Sum of the above |
+| Weight lost in dyeing (usually 8–12%, to confirm) | raises the cost to about 600–610 | Typical range, needs the factory's own figure |
+| Scraps (jhut) sold | 4–5 back | Accountant |
+| **Real loss per kg wasted** | **about 545** | 549 minus jhut sale |
+
+> Selling jhut recovers only about 1% of the cost. Not cutting fabric into scraps in the first place is worth more than 100 times as much.
+
+### What a better yield is worth
+
+Estimate: 50,000 T-shirts × 0.20–0.25 kg of fabric each = **10,000–12,500 kg of fabric a month** (to be confirmed in Phase 1). The table uses the middle figure, 11,000 kg, and Tk 545 lost per wasted kg.
+
+| Yield gain | Fabric saved a month | Saving a month | Saving a year |
+|---|---|---|---|
+| 2 percentage points | 220 kg | about Tk 1.2 lakh | about Tk 14 lakh |
+| 5 percentage points | 550 kg | about Tk 3.0 lakh | about Tk 36 lakh |
+| 8 percentage points | 880 kg | about Tk 4.8 lakh | about Tk 58 lakh |
+
+### Accounting notes from the yarn bills
+
+- Bill 979, line 2 (20D Creora) reads "36 kg × 3 cartons = 72 kg", but 36 × 3 = 108 kg. Bill 977 shows the same item as "24 kg × 3 = 72 kg". Please confirm with the supplier whether the quantity or the carton weight was mis-written.
+- By weight, the November bills are about 78% cotton yarn, but most T-shirts are polyester. These bills may be only part of the month's purchases. Worth checking for the fabric totals in Phase 1.
+
+===PAGEBREAK===
+
+# 4. The plan in six phases
+
+| Phase | What happens | Rough time | Cost |
+|---|---|---|---|
+| 1. Measure | Weigh fabric in and scraps out to find today's yield | Weeks 1–2 | Scale only |
+| 2. Digitise | Turn cardboard patterns into computer files with phone photos | Weeks 2–3 | Free |
+| 3. Nest | Free software arranges the pieces as tightly as possible | Week 3 | Free |
+| 4. Print | Get the layout onto the fabric at full size | Week 4 | CAD shop fee per marker |
+| 5. Pilot | Cut one real order the new way and compare it with the old way | Weeks 4–6 | Very small |
+| 6. Roll out | Buy the plotter, train staff, use it on every order | Months 2–3 | Budget tier (Section 6) |
+
+## Phase 1: Measure today's waste
+
+**Goal:** know today's yield, so every later saving can be proven in taka.
+
+1. Weigh the fabric rolls before spreading.
+2. Weigh any leftover roll pieces after spreading.
+3. Put all scraps from that lay in one labelled bag and weigh it.
+4. Count the T-shirts cut.
+5. Note how long the chalk marker took (start and end time).
+
+**Calculation:** fabric used = before − leftover. Yield % = (fabric used − scraps) ÷ fabric used × 100. Example: 200 kg used, 34 kg scraps, so yield = 83%.
+
+- Measure 5–10 lays over 2 weeks, across different orders and sizes.
+- Use the same scale every time, and keep one bag per lay.
+- Measure normal working days; do not change the method while measuring.
+- **Who:** a cutting helper records; the cutting master checks; the accountant calculates.
+- **Output:** today's yield %, actual kg per dozen (compare with the costing sheet), and hours spent on markers.
+
+## Phase 2: Get the patterns into the computer
+
+**Goal:** turn each cardboard piece into a computer file. One T-shirt has about 4–5 pieces, so 4 sizes means only about 16–20 pieces.
+
+1. Ask the pattern master and merchandiser whether buyers ever send pattern files (.dxf or .plt). If yes, use them directly.
+2. Otherwise, place each cardboard piece on a dark, flat surface with 4 printed reference squares of known size at the corners.
+3. Photograph it from directly above (from a stool or a phone holder).
+4. Free software traces the outline and saves a file (Inkscape is free; a simple tracing tool can be set up).
+5. Check accuracy: measure the cardboard with a tape, measure the file, and print one piece on A4 at real size to lay on the cardboard. A difference of 1–2 mm is acceptable.
+
+- Each file must keep the full outline with seam allowance, the grain line, notches, and a label (piece name and size).
+- **The pattern master's work does not change.** They keep making cardboard patterns; the computer staff photographs them (about 30–60 minutes per style).
+- **Later (optional):** Seamly2D, free pattern software that creates all sizes automatically from measurements.
+
+## Phase 3: Let the computer arrange the pieces
+
+**Goal:** a tighter layout than chalk by hand, made in minutes.
+
+**Software:** Deepnest, free and open-source, runs on Windows, and reads and writes DXF and SVG files.
+
+| Setting | Meaning | Example |
+|---|---|---|
+| Fabric width | Size of the "box" to fill | 60 inches |
+| Pieces and quantity | How many of each piece and size | Fronts: S×1, M×2, L×2, XL×1 |
+| Rotation | Which ways pieces may turn | Only 0° and 180°, to respect the grain line |
+| Spacing | Gap for the cutting knife | About 1–2 mm |
+
+**Three ways to raise yield:**
+- **Mix sizes in one marker.** Small pieces fill the gaps left by big ones.
+- **Allow head-to-toe (180°) placement** where the fabric allows it. The cutting master must confirm this for each fabric.
+- **Choose the fabric width.** The factory orders its own knitting, so it can test 2–3 widths in Deepnest and ask the knitting mill for the width that gives the highest yield. This costs nothing extra.
+
+> **Honest target:** hand chalk markers for T-shirts are often around 75–82%. Good computer markers often reach 85–90%. Over 90% is possible on some orders with mixed sizes, the right width and head-to-toe placement. Zero waste is not possible with curved pieces such as necks and armholes.
+
+## Phase 4: Get the layout onto the fabric
+
+**Goal:** a full-size marker on top of the spread, so cutters follow exact lines instead of chalk.
+
+| Option | Cost | Good for | Limits |
+|---|---|---|---|
+| Taped A4 printouts (poster print) | Free | Checking small sections | A full marker needs 100+ sheets |
+| Local CAD or marker shop prints it | Fee per metre or marker | The pilot | Travel time, cost per order |
+| Projector over the table, traced with chalk | About Tk 40,000–48,000 | An optional experiment | Covers 1.5–2 m at a time; weak in bright light |
+| Own garment inkjet plotter | About Tk 2.5–3.5 lakh new | Daily use | Paper and ink cost; must be tested first |
+
+- Plotters usually accept .plt files. Free Inkscape can convert the Deepnest layout to .plt. **Before buying, bring your own test file and ask the seller to print it.**
+- Always check 3–4 printed pieces against the cardboard with a tape.
+
+## Phase 5: Pilot on one real order
+
+**Goal:** prove the saving with real numbers before spending real money.
+
+1. Pick one normal T-shirt order.
+2. Digitise, nest and print its marker (Phases 2–4).
+3. Cut 2–3 lays with the printed marker.
+4. Measure exactly as in Phase 1: fabric in, scraps out, shirts cut, time.
+5. Quality check: measure cut pieces against the size chart.
+
+| Measure | Chalk method (Phase 1) | Computer method (pilot) |
+|---|---|---|
+| Yield % | to be measured | to be measured |
+| Kg per dozen | to be measured | to be measured |
+| Time to make the marker | to be measured | to be measured |
+| Cutting mistakes or re-cuts | to be measured | to be measured |
+| Pieces pass quality check | – | yes or no |
+
+**Decision rule (agree before starting):**
+- **Go:** yield improves by 3 points or more and the pieces pass quality check. Move to Phase 6.
+- **Adjust and retry:** a small gain, or practical problems. Try other widths or size mixes.
+- **Stop:** no gain. Very little money has been spent.
+
+> Two things can spoil the test. (1) Knit fabric must rest for about a day after unrolling (relaxation), or pieces shrink back to the wrong size. (2) The cutting master must be involved from day one: they approve the marker and decide if it is practical to cut.
+
+## Phase 6: Roll out to every order
+
+| Step | Daily routine for each order | Who | Time |
+|---|---|---|---|
+| 1 | Make cardboard patterns | Pattern master | As today |
+| 2 | Photograph and turn them into files | Computer staff | 30–60 min per style |
+| 3 | Nest in Deepnest (mixed sizes, best width) | Computer staff | 15–30 min |
+| 4 | Check and approve on screen | Cutting master | About 10 min |
+| 5 | Print on the plotter | Computer staff | About 10 min |
+| 6 | Spread, let the fabric rest, cut | Cutting team | As today |
+| 7 | Weigh scraps and record them | Cutting helper | About 5 min |
+
+- **Marker library:** save every file with a clear name (for example BuyerX_Tee_SML_60in.plt) so repeat orders reuse it in minutes.
+- **Width rule:** for each new style, test 2–3 widths and tell the knitting mill which one to knit.
+- **Training:** the computer staff learns Deepnest, photo digitising and the plotter in about 1–2 weeks (free videos are available). **Train a second person** so work does not stop if one person is absent.
+- **Backup:** keep the CAD shop as a backup if the plotter breaks.
+
+===PAGEBREAK===
+
+# 5. Who does what
+
+| Person | Role in the project |
+|---|---|
+| Owner | Approves the pilot, the decision rule and the budget tier |
+| Accountant | Collects measurements, calculates yield and savings, writes the monthly summary |
+| Pattern master | Keeps making patterns; checks that the computer files match the cardboard |
+| Cutting master | Sets rules (direction, spacing), approves each marker, runs cutting |
+| Computer staff (plus one backup) | Photographs patterns, runs Deepnest, prints markers, keeps the marker library |
+| Cutting helper | Weighs fabric and scraps for each lay |
+
+# 6. Budget tiers: what each level can afford
+
+Prices are from Bangladeshi online listings found in November 2026. They are a guide only: get 2–3 current quotes before buying.
+
+## Tier 0: Free (up to about Tk 10,000)
+
+| Item | Price guide |
+|---|---|
+| Deepnest nesting software | Free |
+| Inkscape (tracing and file conversion) | Free |
+| Phone photos for digitising | Free (phone already owned) |
+| Excel tracking sheet | Free (computer already owned) |
+| 100 kg platform scale, if the store has none | About Tk 6,500 (a 50 kg hanging scale is about Tk 350–520) |
+| A4 paper and ink for test prints | Small |
+| Optional: a CAD shop prints test markers | Fee per marker or metre (ask locally) |
+
+**What this tier can do:** all of Phases 1–3, and Phase 5 if a CAD shop prints the pilot markers. It shows the real saving on screen and on a few real lays. It does **not** give daily full-size markers without paying a shop each time.
+
+## Tier 1: Small (about Tk 3–4 lakh), recommended after a successful pilot
+
+| Item | Price guide |
+|---|---|
+| Everything in Tier 0 | As above |
+| Garment inkjet plotter, new, about 1.8 m print width | About Tk 2.5 lakh (listed); other models Tk 3.2–3.5 lakh |
+| Or a second-hand plotter from an upgrading factory | Lower; test before buying |
+| Starter stock of marker paper rolls and ink | Get a quote (narrow 24-inch, 50 m rolls list at Tk 850–1,450; wide marker rolls cost more) |
+| Training time for two staff members | Staff time only |
+
+**What this tier can do:** the full process every day, on every order. Markers are printed in-house, chalk tracing errors stop, and marker time drops from hours to minutes.
+
+**Payback (example with a Tk 3.5 lakh total):**
+
+| Yield gain | Saving a month | Months to pay back |
+|---|---|---|
+| 2 points | about Tk 1.2 lakh | about 3 months |
+| 5 points | about Tk 3.0 lakh | about 1.2 months |
+| 8 points | about Tk 4.8 lakh | under 1 month |
+
+## Tier 2: Medium (Tier 1 plus extras; get quotes)
+
+| Item | Price guide |
+|---|---|
+| Everything in Tier 1 | About Tk 3–4 lakh |
+| Paid garment CAD software (for example a Chinese brand such as Richpeace) with automatic grading and marker making | Price on quote only; ask 2–3 suppliers |
+| Camera-based pattern digitising software or a digitiser board | Price on quote |
+| Business projector for the projection experiment | About Tk 40,000–48,000 |
+| Formal CAD training course | Price on quote |
+
+**What this tier adds:** faster digitising, automatic sizes, stronger nesting, and less dependence on one person. Consider it only after Tier 1 has run for a few months and the savings are proven.
+
+> **Recommended path:** start in Tier 0, run the pilot, move to Tier 1 only if the decision rule says "go", and treat Tier 2 as a later upgrade.
+
+# 7. Risks and how to handle them
+
+| Risk | What can go wrong | How to handle it |
+|---|---|---|
+| Fabric stretch | Knit pieces shrink back after cutting | Let the fabric rest about a day after unrolling |
+| Staff resistance | The cutting master feels replaced | Involve them from day one; they approve every marker |
+| Digitising accuracy | Photo files are slightly off | Reference squares, tape checks, A4 real-size test |
+| Plotter compatibility | The plotter cannot read the files | Test with your own .plt file before paying |
+| One-person dependence | Work stops if the computer staff is absent | Train a second person; keep the CAD shop as backup |
+| Direction rules | Pieces placed the wrong way on fabric | The cutting master sets rotation rules per fabric |
+| Width changes | Rolls differ from the planned width | Measure actual width before nesting; keep markers for 2–3 widths |
+| Measurement stops | Savings can no longer be proven | Weekly sheet owned by the accountant; monthly owner summary |
+
+# 8. Measuring success
+
+| Measure | How | How often |
+|---|---|---|
+| Yield % per order | Fabric in minus scraps, divided by fabric in | Every order |
+| Kg per dozen | Fabric used ÷ dozens cut, compared with the costing sheet | Every order |
+| Fabric saved in taka | Saved kg × Tk 545 | Monthly |
+| Marker making time | Start and end time | Every marker |
+| Mistakes and re-cuts | Count from the cutting room | Weekly |
+
+# 9. Open questions for the team
+
+| Ask | Question |
+|---|---|
+| Cutting master | What fabric widths are typical, and how many layers per cut? |
+| Cutting master | Can pieces be placed head-to-toe, or must all face one way? |
+| Cutting master | What gap is left between pieces for the knife? One size or mixed sizes per marker today? |
+| Pattern master | Do buyers ever send pattern files (.dxf or .plt)? |
+| Merchandiser | What is the costing consumption (kg per dozen) for a typical T-shirt order? |
+| Dyeing | How much weight is lost during dyeing, in %? |
+| Owner | Is it acceptable to pay a CAD shop for the pilot markers? |
+| Supplier | Bill 979: is the Creora quantity 72 kg or 108 kg? |
+
+# 10. Simple word list
+
+| Word | Meaning |
+|---|---|
+| Marker | The plan showing where every pattern piece sits on the fabric |
+| Nesting | Arranging the pieces as tightly as possible, like a puzzle |
+| Yield (marker efficiency) | % of fabric that becomes garment pieces; the rest is waste |
+| Lay | One stack of fabric layers cut at the same time |
+| Jhut | Fabric scraps left after cutting |
+| Plotter | A wide printer that prints the marker at full size on paper rolls |
+| DXF / PLT | Common computer file types for patterns and markers |
+| Grading | Making all sizes from one base pattern |
+| Relaxation | Letting knit fabric rest so it stops shrinking before cutting |
+| Grain line | The arrow on a pattern that shows its direction on the fabric |
+
+# 11. Price sources (checked November 2026)
+
+- Garment inkjet plotters: Suja Global (sujaglobal.com.bd), Sagartex (sagartexbd.org), NSC BD (nscbd.com)
+- Scales: ULA (ula.com.bd), BDStall (bdstall.com), Rokomari (rokomari.com)
+- Projectors: BDStall, Sumash Tech, Tech Valley Distribution
+- Plotter paper: BDStall, BME (bme.com.bd)
+- Deepnest: deepnest.io (free download)
+
+These are online list prices from sellers, not quotes, and they may not include delivery, installation or VAT.
